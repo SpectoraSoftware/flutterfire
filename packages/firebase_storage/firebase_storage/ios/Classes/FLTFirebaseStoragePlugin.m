@@ -102,13 +102,15 @@ typedef NS_ENUM(NSUInteger, FLTFirebaseStorageStringType) {
                                   binaryMessenger:[registrar messenger]];
 
   FLTFirebaseStoragePlugin *instance = [FLTFirebaseStoragePlugin sharedInstance];
-  instance.channel = channel;
-#if TARGET_OS_OSX
-  // TODO(Salakar): Publish does not exist on MacOS version of FlutterPluginRegistrar.
-#else
-  [registrar publish:instance];
-#endif
-  [registrar addMethodCallDelegate:instance channel:channel];
+    if (instance.channel == nil) {
+        instance.channel = channel;
+      #if TARGET_OS_OSX
+        // TODO(Salakar): Publish does not exist on MacOS version of FlutterPluginRegistrar.
+      #else
+        [registrar publish:instance];
+      #endif
+        [registrar addMethodCallDelegate:instance channel:channel];
+    }
 }
 
 - (void)cleanupWithCompletion:(void (^)(void))completion {
@@ -127,7 +129,7 @@ typedef NS_ENUM(NSUInteger, FLTFirebaseStorageStringType) {
 
 - (void)detachFromEngineForRegistrar:(NSObject<FlutterPluginRegistrar> *)registrar {
   [self cleanupWithCompletion:^() {
-    self.channel = nil;
+      self.channel = nil;
   }];
 }
 
