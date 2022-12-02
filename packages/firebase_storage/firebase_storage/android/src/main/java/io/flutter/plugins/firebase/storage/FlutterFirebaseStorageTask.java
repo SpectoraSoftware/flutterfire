@@ -31,7 +31,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 class FlutterFirebaseStorageTask {
-  static final SparseArray<FlutterFirebaseStorageTask> inProgressTasks = new SparseArray<>();
+  static final Map<Integer, FlutterFirebaseStorageTask> inProgressTasks = new HashMap<Integer, FlutterFirebaseStorageTask>();
   private static final Executor taskExecutor = Executors.newSingleThreadExecutor();
   private final FlutterFirebaseStorageTaskType type;
   private final int handle;
@@ -70,14 +70,8 @@ class FlutterFirebaseStorageTask {
 
   static void cancelInProgressTasks() {
     synchronized (inProgressTasks) {
-      for (int i = 0; i < inProgressTasks.size(); i++) {
-        FlutterFirebaseStorageTask task = null;
-        try {
-          task = inProgressTasks.valueAt(i);
-        } catch (ArrayIndexOutOfBoundsException e) {
-          // TODO(Salakar): Why does this happen? Race condition / multiple destroy calls?
-          // Can safely ignore exception for now, see https://github.com/firebase/flutterfire/issues/4334
-        }
+      for (Map.Entry<Integer,FlutterFirebaseStorageTask> entry : inProgressTasks.entrySet()) {
+        FlutterFirebaseStorageTask task = entry.getValue();
         if (task != null) {
           task.destroy();
         }
@@ -150,12 +144,7 @@ class FlutterFirebaseStorageTask {
       if (storageTask.isInProgress() || storageTask.isPaused()) {
         storageTask.cancel();
       }
-      try {
-        inProgressTasks.remove(handle);
-      } catch (ArrayIndexOutOfBoundsException e) {
-        // TODO(Salakar): Why does this happen? Race condition / multiple destroy calls?
-        // Can safely ignore exception for now, see https://github.com/firebase/flutterfire/issues/4334
-      }
+      inProgressTasks.remove(handle);
     }
 
     synchronized (cancelSyncObject) {
