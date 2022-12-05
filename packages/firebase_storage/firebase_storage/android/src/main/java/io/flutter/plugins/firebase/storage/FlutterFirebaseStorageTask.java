@@ -12,9 +12,11 @@ import static io.flutter.plugins.firebase.storage.FlutterFirebaseStoragePlugin.p
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.SparseArray;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.storage.FileDownloadTask;
@@ -22,13 +24,15 @@ import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugins.firebase.core.FlutterFirebasePlugin;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugins.firebase.core.FlutterFirebasePlugin;
 
 class FlutterFirebaseStorageTask {
   static final Map<Integer, FlutterFirebaseStorageTask> inProgressTasks = new HashMap<Integer, FlutterFirebaseStorageTask>();
@@ -58,6 +62,7 @@ class FlutterFirebaseStorageTask {
     this.bytes = bytes;
     this.fileUri = fileUri;
     this.metadata = metadata;
+    Log.d("FILEUPLOAD", "ADDED TO MAP");
     inProgressTasks.put(handle, this);
   }
 
