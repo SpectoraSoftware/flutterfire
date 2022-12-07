@@ -3,7 +3,6 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     repositories {
-        mavenLocal()
         google()
         mavenCentral()
     }
@@ -15,7 +14,6 @@ buildscript {
 
 rootProject.allprojects {
     repositories {
-        mavenLocal()
         google()
         mavenCentral()
     }
@@ -60,7 +58,7 @@ android {
     dependencies {
         api firebaseCoreProject
         implementation platform("com.google.firebase:firebase-bom:${getRootProjectExtOrCoreProperty("FirebaseSDKVersion", firebaseCoreProject)}")
-        implementation 'com.google.firebase:firebase-storage:20.1.1-SNAPSHOT'
+        implementation files('libs/firebase-storage.aar')
         implementation 'androidx.annotation:annotation:1.1.0'
     }
 }
