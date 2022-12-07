@@ -176,7 +176,7 @@ public class FlutterFirebaseStoragePlugin
       storage.setMaxUploadExecutors((int) maxUploadExecutors);
     }
 
-    Object maxUploadExecutors = arguments.get("maxDownloadExecutors");
+    Object maxDownloadExecutors = arguments.get("maxDownloadExecutors");
     if (maxDownloadExecutors != null) {
       storage.setMaxDownloadExecutors((int) maxDownloadExecutors);
     }
