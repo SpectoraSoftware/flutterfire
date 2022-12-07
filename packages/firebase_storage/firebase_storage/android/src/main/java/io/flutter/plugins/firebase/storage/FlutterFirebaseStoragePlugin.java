@@ -171,6 +171,16 @@ public class FlutterFirebaseStoragePlugin
       storage.setMaxUploadRetryTimeMillis(getLongValue(maxUploadRetryTime));
     }
 
+    Object maxUploadExecutors = arguments.get("maxUploadExecutors");
+    if (maxUploadExecutors != null) {
+      storage.setMaxUploadExecutors((int) maxUploadExecutors);
+    }
+
+    Object maxUploadExecutors = arguments.get("maxDownloadExecutors");
+    if (maxDownloadExecutors != null) {
+      storage.setMaxDownloadExecutors((int) maxDownloadExecutors);
+    }
+
     return storage;
   }
 
