@@ -107,6 +107,12 @@ class MethodChannelFirebaseStorage extends FirebaseStoragePlatform {
   @override
   int maxDownloadRetryTime = const Duration(minutes: 10).inMilliseconds;
 
+  @override
+  int maxUploadExecutors = 2;
+
+  @override
+  int maxDownloadExecutors = 3;
+
   Future<void> _handleTaskStateChange(
       TaskState taskState, Map<dynamic, dynamic> arguments) async {
     // Get & cast native snapshot data to a Map
@@ -176,5 +182,15 @@ class MethodChannelFirebaseStorage extends FirebaseStoragePlatform {
   @override
   Future<void> setMaxDownloadRetryTime(int time) async {
     maxDownloadRetryTime = time;
+  }
+
+  @override
+  Future<void> setMaxUploadExecutors(int value) async {
+    maxUploadExecutors = value;
+  }
+
+  @override
+  Future<void> setMaxDownloadExecutors(int value) async {
+    maxDownloadExecutors = value;
   }
 }

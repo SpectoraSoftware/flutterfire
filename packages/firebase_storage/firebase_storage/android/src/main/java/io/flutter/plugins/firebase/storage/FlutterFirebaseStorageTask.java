@@ -62,7 +62,6 @@ class FlutterFirebaseStorageTask {
     this.bytes = bytes;
     this.fileUri = fileUri;
     this.metadata = metadata;
-    Log.d("FILEUPLOAD", "ADDED TO MAP");
     inProgressTasks.put(handle, this);
   }
 

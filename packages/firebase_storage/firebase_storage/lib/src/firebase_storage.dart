@@ -150,6 +150,18 @@ class FirebaseStorage extends FirebasePluginPlatform {
     return _delegate.setMaxDownloadRetryTime(time.inMilliseconds);
   }
 
+  /// The new maximum number of upload executors.
+  void setMaxUploadExecutors(int value) {
+    assert(!value.isNegative);
+    return _delegate.setMaxUploadExecutors(value);
+  }
+
+  /// The new maximum number of download executors.
+  void setMaxDownloadExecutors(int value) {
+    assert(!value.isNegative);
+    return _delegate.setMaxDownloadExecutors(value);
+  }
+
   /// Changes this instance to point to a Storage emulator running locally.
   ///
   /// Set the [host] (ex: localhost) and [port] (ex: 9199) of the local emulator.

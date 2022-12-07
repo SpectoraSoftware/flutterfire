@@ -76,6 +76,16 @@ abstract class FirebaseStoragePlatform extends PlatformInterface {
     throw UnimplementedError('get.maxDownloadRetryTime is not implemented');
   }
 
+  /// The maximum number of upload executors.
+  int get maxUploadExecutors {
+    throw UnimplementedError('get.maxUploadExecutors is not implemented');
+  }
+
+  /// The maximum number of download executors.
+  int get maxDownloadExecutors {
+    throw UnimplementedError('get.maxDownloadExecutors is not implemented');
+  }
+
   /// The Storage emulator host this instance is configured to use. This
   /// was required since iOS does not persist these settings on instances and
   /// they need to be set every time when getting a `FIRStorage` instance.
@@ -129,5 +139,15 @@ abstract class FirebaseStoragePlatform extends PlatformInterface {
   /// The new maximum download retry time in milliseconds.
   void setMaxDownloadRetryTime(int time) {
     throw UnimplementedError('setMaxDownloadRetryTime() is not implemented');
+  }
+
+  /// The new maximum number of upload executors.
+  void setMaxUploadExecutors(int value) {
+    throw UnimplementedError('setMaxUploadExecutors() is not implemented');
+  }
+
+  /// The new maximum number of download executors.
+  void setMaxDownloadExecutors(int value) {
+    throw UnimplementedError('setMaxDownloadExecutors() is not implemented');
   }
 }
