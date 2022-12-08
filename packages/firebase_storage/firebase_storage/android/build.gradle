@@ -58,8 +58,14 @@ android {
     dependencies {
         api firebaseCoreProject
         implementation platform("com.google.firebase:firebase-bom:${getRootProjectExtOrCoreProperty("FirebaseSDKVersion", firebaseCoreProject)}")
-        implementation files('libs/firebase-storage.aar')
+        implementation 'com.google.firebase:firebase-storage'
         implementation 'androidx.annotation:annotation:1.1.0'
+    }
+}
+
+configurations.all {
+    resolutionStrategy.dependencySubstitution {
+        substitute module("com.google.firebase:firebase-storage") using files('libs/firebase-storage.aar') because "we work with the unreleased forked version"
     }
 }
 
