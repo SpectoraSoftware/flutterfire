@@ -59,6 +59,8 @@ android {
         api firebaseCoreProject
         implementation platform("com.google.firebase:firebase-bom:${getRootProjectExtOrCoreProperty("FirebaseSDKVersion", firebaseCoreProject)}")
         //implementation 'com.google.firebase:firebase-storage'
+        implementation 'com.google.firebase:firebase-common'
+        implementation 'com.google.firebase:firebase-components'
         implementation 'com.google.android.gms:play-services-tasks'
         implementation fileTree(dir: 'libs', include: '*.aar')
         implementation 'androidx.annotation:annotation:1.1.0'
